@@ -208,7 +208,7 @@ FUNCTION     | NOTES
 [p_div()](src/math/p_div.c)           | division  
 [p_dot()](src/math/p_dot.c)           | dot product  
 [p_exp()](src/math/p_div.c)           | exponential  
-[p_ftoi()](src/math/p_ftoi.c)         | float to  
+[p_ftoi()](src/math/p_ftoi.c)         | float to integer conversion
 [p_itof()](src/math/p_itof.c)         | integer to float conversion  
 [p_inv()](src/math/p_inv.c)           | inverse  
 [p_invcbrt()](src/math/p_invcbrt.c)   | inverse cube root  
