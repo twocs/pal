@@ -28,7 +28,15 @@ void p_sad16x16_f32(const float *x, float *m, float *r, int cols,
          for (j = 0; j < 16; j++)
           sad += abs(m[j+i*16] - x[j+i*cols]);
        return sad;
-
      */
 
+// the image is big... which pixel do we want the pixel for?
+
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			
+			float v = *(m + j + i*cols) - *(b + j + i*cols);
+			*(r + j + i*cols) = (1 - ((v < 0) << 1)) * v;
+		}
+	}
 }
