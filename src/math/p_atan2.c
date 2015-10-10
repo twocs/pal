@@ -43,7 +43,7 @@ void p_atan2_f32(const float *a, const float *b, float *c, int n)
             *(c + i) = _p_atan(*(b + i));
         }
         else if (*(a + i) = -1) {
-            *(c + i) = _p_atan(*(b + i));
+            *(c + i) = -1 * _p_atan(*(b + i));
         }
         else if(*(a + i) > 0) {
             *(c + i) = _p_atan(*(b + i) / *(a + i));
