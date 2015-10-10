@@ -1,6 +1,8 @@
 #include <pal.h>
 // #include <math.h>
 
+static const float pi_2 = (float) M_PI * 0.5f;
+
 /**
  *
  * Calculates the inverse tangent (arc tangent) of b/a. Stability not guaranteed
@@ -27,10 +29,10 @@ void p_atan2_f32(const float *a, const float *b, float *c, int n)
         if (*(b + i) == 0)
         {
             if(*(a + i) > 0) {
-                *(c + i) = PI * 0.5;
+                *(c + i) = pi_2;
             }
             else /* if(*(a + i) < 0) */ {
-                *(c + i) = -PI * 0.5;
+                *(c + i) = - pi_2;
             }
             /* // ignore this case, because it's an illegal value
             if(*(a + i) == 0) { 
@@ -38,21 +40,21 @@ void p_atan2_f32(const float *a, const float *b, float *c, int n)
             }
             */
         }
-        else if (*(a + i) = 1) {
+        else if (*(a + i) == 1) {
             *(c + i) = _p_atan(*(b + i));
         }
-        else if (*(a + i) = -1) {
-            *(c + i) = -1 * _p_atan(*(b + i));
+        else if (*(a + i) == -1) {
+            *(c + i) = -_p_atan(*(b + i));
         }
         else if(*(a + i) > 0) {
             *(c + i) = _p_atan(*(b + i) / *(a + i));
         }
         else /* if(*(a + i) < 0) */ {
             if (*(b + i) > 0) {
-                *(c + i) = _p_atan(*(b + i) / *(a + i)) + PI * 0.5;
+                *(c + i) = _p_atan(*(b + i) / *(a + i)) + pi_2;
             }
             else /* if (*(b + i) > 0) */ {
-                *(c + i) = _p_atan(*(b + i) / *(a + i)) - PI * 0.5;
+                *(c + i) = _p_atan(*(b + i) / *(a + i)) - pi_2;
             }
         }
     }
