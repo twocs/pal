@@ -19,7 +19,6 @@
  * @todo        Implement without using libm
  *
  */
- a=y, b=x => y/x, 
 void p_atan2_f32(const float *a, const float *b, float *c, int n)
 {
 
