@@ -1,4 +1,5 @@
 #include <pal.h>
+// #include <math.h>
 
 /**
  *
@@ -13,19 +14,47 @@
  *
  * @param n     Size of 'a' and 'c' vector.
  *
- * @param p     Number of processor to use (task parallelism)
- *
- * @param team  Team to work with 
- *
  * @return      None
  *
+ * @todo        Implement without using libm
+ *
  */
-#include <math.h>
-void p_atan2_f32(float *a, float *b, float *c, int n, int p, p_team_t team)
+ a=y, b=x => y/x, 
+void p_atan2_f32(const float *a, const float *b, float *c, int n)
 {
 
     int i;
     for (i = 0; i < n; i++) {
-        *(c + i) = atan2f(*(b + i), *(a + i));
+        if (*(b + i) == 0)
+        {
+            if(*(a + i) > 0) {
+                *(c + i) = PI * 0.5;
+            }
+            else /* if(*(a + i) < 0) */ {
+                *(c + i) = -PI * 0.5;
+            }
+            /* // ignore this case, because it's an illegal value
+            if(*(a + i) == 0) { 
+                *(c + i) = NAN;
+            }
+            */
+        }
+        else if (*(a + i) = 1) {
+            *(c + i) = _p_atan(*(b + i));
+        }
+        else if (*(a + i) = -1) {
+            *(c + i) = _p_atan(*(b + i));
+        }
+        else if(*(a + i) > 0) {
+            *(c + i) = _p_atan(*(b + i) / *(a + i));
+        }
+        else /* if(*(a + i) < 0) */ {
+            if (*(b + i) > 0) {
+                *(c + i) = _p_atan(*(b + i) / *(a + i)) + PI * 0.5;
+            }
+            else /* if (*(b + i) > 0) */ {
+                *(c + i) = _p_atan(*(b + i) / *(a + i)) - PI * 0.5;
+            }
+        }
     }
 }
